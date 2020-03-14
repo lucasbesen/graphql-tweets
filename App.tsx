@@ -1,24 +1,36 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from '@react-navigation/stack';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import apolloClient from 'app/graphql/apolloClient';
+import ROUTES, { StackParamsList } from 'app/config/routes';
+import { HomeScreen } from 'app/components/screens';
+
+const Stack = createStackNavigator<StackParamsList>();
+
+const stackOptions: StackNavigationOptions = {
+  title: null,
+  headerTransparent: true,
+  headerLeft: null,
+  gestureEnabled: true,
+};
+
+const MainStack = () => (
+  <Stack.Navigator initialRouteName={ROUTES.HOME} screenOptions={stackOptions}>
+    <Stack.Screen name={ROUTES.HOME} component={HomeScreen} />
+  </Stack.Navigator>
+);
 
 export default function App() {
   return (
     <ApolloProvider client={apolloClient}>
-      <View style={styles.container}>
-        <Text>Open up App.tsx to start working on your app!</Text>
-      </View>
+      <NavigationContainer>
+        <MainStack />
+      </NavigationContainer>
     </ApolloProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
