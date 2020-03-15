@@ -11,15 +11,15 @@ type TweetsData = {
 type TweetsVars = {
   q: string;
   count: number;
-  result_type: ResultType;
+  resultType: ResultType;
 };
 
 const useTweetsQuery = (search?: string) => {
   const { data, loading } = useQuery<TweetsData, TweetsVars>(GET_TWEETS, {
     variables: {
-      q: search || 'reactjs',
+      q: search || '#reactjs',
       count: 40,
-      result_type: ResultType.Recent,
+      resultType: ResultType.Recent,
     },
   });
 
