@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   createStackNavigator,
   StackNavigationOptions,
@@ -9,14 +10,13 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import apolloClient from 'app/graphql/apolloClient';
 import ROUTES, { StackParamsList } from 'app/config/routes';
 import { HomeScreen } from 'app/components/screens';
+import theme from 'app/config/theme';
 
 const Stack = createStackNavigator<StackParamsList>();
 
 const stackOptions: StackNavigationOptions = {
-  title: null,
   headerTransparent: true,
-  headerLeft: null,
-  gestureEnabled: true,
+  headerTintColor: theme.colors.text.white,
 };
 
 const MainStack = () => (
@@ -29,7 +29,9 @@ export default function App() {
   return (
     <ApolloProvider client={apolloClient}>
       <NavigationContainer>
-        <MainStack />
+        <SafeAreaProvider>
+          <MainStack />
+        </SafeAreaProvider>
       </NavigationContainer>
     </ApolloProvider>
   );
