@@ -1,24 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from '@react-navigation/stack';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import apolloClient from 'app/graphql/apolloClient';
+import ROUTES, { StackParamsList } from 'app/config/routes';
+import { HomeScreen } from 'app/components/screens';
+import theme from 'app/config/theme';
+
+const Stack = createStackNavigator<StackParamsList>();
+
+const stackOptions: StackNavigationOptions = {
+  headerTransparent: true,
+  headerTintColor: theme.colors.text.white,
+};
+
+const MainStack = () => (
+  <Stack.Navigator initialRouteName={ROUTES.HOME} screenOptions={stackOptions}>
+    <Stack.Screen name={ROUTES.HOME} component={HomeScreen} />
+  </Stack.Navigator>
+);
 
 export default function App() {
   return (
     <ApolloProvider client={apolloClient}>
-      <View style={styles.container}>
-        <Text>Open up App.tsx to start working on your app!</Text>
-      </View>
+      <NavigationContainer>
+        <SafeAreaProvider>
+          <MainStack />
+        </SafeAreaProvider>
+      </NavigationContainer>
     </ApolloProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
