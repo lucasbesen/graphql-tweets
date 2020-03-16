@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StatusBar, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
@@ -53,6 +53,7 @@ const MainStack = () => (
 export default function App() {
   return (
     <ApolloProvider client={apolloClient}>
+      <StatusBar barStyle="dark-content" />
       <NavigationContainer>
         <SafeAreaProvider>
           <MainStack />
