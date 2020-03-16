@@ -34,7 +34,7 @@ const HomeScreen = ({ route: { params } }: Props) => {
         <FlatList
           data={data?.twitter?.search}
           renderItem={({ item }) => <Tweet tweet={item} />}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id + item.user.id}
         />
       </Wrapper>
     </Container>
