@@ -22,7 +22,7 @@ export enum ResultType {
 }
 
 export const GET_TWEETS = gql`
-  query TweetsQuery($q: String!, $count: Int!, $resultType: SearchReponse!) {
+  query getTweets($q: String!, $count: Int!, $resultType: SearchReponse!) {
     twitter {
       search(q: $q, count: $count, result_type: $resultType) {
         id
@@ -30,6 +30,8 @@ export const GET_TWEETS = gql`
         created_at
         user {
           name
+          screen_name
+          profile_image_url
         }
       }
     }
