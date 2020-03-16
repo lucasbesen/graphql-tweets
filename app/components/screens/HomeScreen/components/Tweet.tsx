@@ -1,14 +1,15 @@
 import React from 'react';
+import moment from 'moment-twitter';
 
 import { ProfilePicture, Text, Wrapper } from 'app/components/common';
 import { ITweet } from 'app/graphql/queries';
 import theme from 'app/config/theme';
 
+const truncateUserName = (name: string): string => name.slice(0, 10) + '...';
+
 type Props = {
   tweet: ITweet;
 };
-
-const truncateUserName = (name: string): string => name.slice(0, 10) + '...';
 
 const Tweet = ({ tweet }: Props) => {
   return (
@@ -26,10 +27,9 @@ const Tweet = ({ tweet }: Props) => {
       />
       <Wrapper width="80%">
         <Wrapper isRow mb="5px">
-          <Text isBold mr={10}>
-            {truncateUserName(tweet.user.name)}
-          </Text>
-          <Text>@{tweet.user.screen_name}</Text>
+          <Text isBold>{truncateUserName(tweet.user.name)}</Text>
+          <Text> @{tweet.user.screen_name}</Text>
+          <Text> · {moment(tweet.created_at).twitter()}</Text>
         </Wrapper>
         <Text>{tweet.text}</Text>
       </Wrapper>
