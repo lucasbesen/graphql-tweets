@@ -29,6 +29,7 @@ export const GET_TWEETS = gql`
         text
         created_at
         user {
+          id
           name
           screen_name
           profile_image_url
