@@ -11,11 +11,13 @@ import {
 
 type CustomProps = {
   centralize?: boolean;
+  isRow?: boolean;
 };
 
 type ViewProps = CustomProps & FlexboxProps & SpaceProps & ColorProps;
 
 const StyledView = styled.View<ViewProps>`
+  ${props => props.isRow && 'flex-direction: row;'}
   ${props =>
     props.centralize && 'align-items: center; justify-content: center;'}
   ${flexbox}

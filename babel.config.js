@@ -3,11 +3,13 @@ module.exports = function(api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
+      '@babel/plugin-proposal-optional-chaining',
       [
         'module-resolver',
         {
           alias: {
             app: './app',
+            assets: './assets',
           },
         },
       ],
